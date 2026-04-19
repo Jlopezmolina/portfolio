@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Coming Soon — Jorge López Molina</title>
+  <meta name="robots" content="noindex" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:   #080808;
+      --ink:  #EEECEA;
+      --i80:  rgba(238,236,234,0.80);
+      --i60:  rgba(238,236,234,0.60);
+      --i40:  rgba(238,236,234,0.40);
+      --i20:  rgba(238,236,234,0.20);
+      --i10:  rgba(238,236,234,0.10);
+      --i06:  rgba(238,236,234,0.06);
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+      --eout: cubic-bezier(0.16, 1, 0.30, 1);
+      --font: -apple-system, BlinkMacSystemFont, 'Manrope', system-ui, sans-serif;
+    }
+
+    html { cursor: none; }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: var(--font);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow: hidden;
+      height: 100dvh;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 3.5rem 3rem;
+    }
+
+    ::selection { background: rgba(238,236,234,0.10); }
+    a { cursor: none; text-decoration: none; }
+
+    /* ─── Cursor ─── */
+    #cur {
+      position: fixed; z-index: 9999; pointer-events: none;
+      width: 7px; height: 7px; background: var(--ink); border-radius: 50%;
+      transform: translate(-50%,-50%);
+      transition: width .22s var(--ease), height .22s var(--ease), opacity .2s;
+      will-change: left, top;
+    }
+    #cur-ring {
+      position: fixed; z-index: 9998; pointer-events: none;
+      width: 28px; height: 28px; border: 1px solid var(--i40); border-radius: 50%;
+      transform: translate(-50%,-50%);
+      transition: width .45s var(--ease), height .45s var(--ease), border-color .3s;
+      will-change: left, top;
+    }
+    body.hov #cur { width: 0; height: 0; opacity: 0; }
+    body.hov #cur-ring { width: 46px; height: 46px; border-color: var(--i20); }
+
+    /* ─── Reveal ─── */
+    .rv {
+      opacity: 0; transform: translateY(20px);
+      transition: opacity .9s var(--eout), transform .9s var(--eout);
+    }
+    .rv.in { opacity: 1; transform: none; }
+    .lr {
+      transform: scaleX(0); transform-origin: left;
+      transition: transform 1.2s var(--eout);
+    }
+    .lr.in { transform: scaleX(1); }
+
+    /* ─── Top bar ─── */
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .wordmark {
+      font-size: .72rem; font-weight: 400; letter-spacing: .04em; color: var(--i40);
+    }
+    .avail {
+      display: flex; align-items: center; gap: 7px;
+      font-size: .7rem; color: var(--i40); letter-spacing: .07em;
+    }
+    .avail-dot {
+      width: 5px; height: 5px; background: #4ade80; border-radius: 50%;
+      animation: pulse 2.5s ease-in-out infinite;
+    }
+    @keyframes pulse { 0%,100%{opacity:1}50%{opacity:.25} }
+
+    /* ─── Centre ─── */
+    .centre {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .label {
+      font-size: .6rem; font-weight: 500; letter-spacing: .18em;
+      text-transform: uppercase; color: var(--i20);
+      margin-bottom: 1.4rem;
+    }
+
+    .heading {
+      font-size: clamp(3rem, 8vw, 6.5rem);
+      font-weight: 200; letter-spacing: -.034em; line-height: .93;
+      margin-bottom: 2rem;
+    }
+
+    hr.rule { border: none; border-top: 1px solid var(--i10); margin-bottom: 1.6rem; }
+
+    .body {
+      font-size: .85rem; font-weight: 300; color: var(--i60);
+      line-height: 1.8; letter-spacing: .01em;
+      max-width: 480px;
+    }
+
+    /* ─── Countdown ─── */
+    .countdown {
+      display: flex; gap: 2.5rem; margin-top: 2.8rem;
+    }
+    .cd-unit {
+      display: flex; flex-direction: column; gap: .35rem;
+    }
+    .cd-value {
+      font-size: clamp(1.8rem, 4vw, 2.8rem);
+      font-weight: 200; letter-spacing: -.03em; line-height: 1;
+      font-variant-numeric: tabular-nums;
+    }
+    .cd-label {
+      font-size: .58rem; letter-spacing: .14em; text-transform: uppercase;
+      color: var(--i20);
+    }
+
+    /* ─── Bottom ─── */
+    .bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+    .contact-line {
+      font-size: .68rem; color: var(--i20); letter-spacing: .04em;
+    }
+    .contact-line a {
+      color: var(--i40);
+      position: relative;
+      transition: color .3s var(--ease);
+    }
+    .contact-line a::after {
+      content: ''; position: absolute; bottom: -1px; left: 0; right: 100%;
+      height: 1px; background: var(--i60);
+      transition: right .4s var(--ease);
+    }
+    .contact-line a:hover { color: var(--i60); }
+    .contact-line a:hover::after { right: 0; }
+    .copy { font-size: .65rem; color: var(--i20); letter-spacing: .04em; }
+
+    @media (max-width: 540px) {
+      body { padding: 2rem 1.5rem; }
+      .countdown { gap: 1.5rem; }
+    }
+  </style>
+</head>
+<body>
+
+<div id="cur"></div>
+<div id="cur-ring"></div>
+
+<div class="top rv" style="transition-delay:.04s">
+  <span class="wordmark">Jorge López Molina</span>
+  <span class="avail"><span class="avail-dot"></span>Available for work</span>
+</div>
+
+<div class="centre">
+  <p class="label rv" style="transition-delay:.1s">Under construction</p>
+  <h1 class="heading rv" style="transition-delay:.17s">Something<br>is coming.</h1>
+  <hr class="rule lr" style="transition-delay:.22s" />
+  <p class="body rv" style="transition-delay:.26s">
+    Working on something new. In the meantime, feel free to reach out or explore my existing work below.
+  </p>
+  <div class="countdown rv" style="transition-delay:.32s" aria-live="polite">
+    <div class="cd-unit">
+      <span class="cd-value" id="cd-d">--</span>
+      <span class="cd-label">Days</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-value" id="cd-h">--</span>
+      <span class="cd-label">Hours</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-value" id="cd-m">--</span>
+      <span class="cd-label">Minutes</span>
+    </div>
+    <div class="cd-unit">
+      <span class="cd-value" id="cd-s">--</span>
+      <span class="cd-label">Seconds</span>
+    </div>
+  </div>
+</div>
+
+<div class="bottom rv" style="transition-delay:.38s">
+  <p class="contact-line">
+    Get in touch — <a href="mailto:jlopezmolina2004@gmail.com">jlopezmolina2004@gmail.com</a>
+    &nbsp;·&nbsp;
+    <a href="index.html">Work →</a>
+  </p>
+  <span class="copy">© 2025</span>
+</div>
+
+<script>
+(function () {
+  /* ── Cursor ── */
+  const cur = document.getElementById('cur');
+  const ring = document.getElementById('cur-ring');
+  let mx = -300, my = -300, rx = -300, ry = -300;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cur.style.left = mx + 'px'; cur.style.top = my + 'px';
+  }, { passive: true });
+  (function tick() {
+    rx += (mx - rx) * 0.12; ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
+    requestAnimationFrame(tick);
+  })();
+  document.querySelectorAll('a').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('hov'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
+  });
+
+  /* ── Reveal ── */
+  requestAnimationFrame(() => {
+    document.querySelectorAll('.rv, .lr').forEach(el => el.classList.add('in'));
+  });
+
+  /* ── Countdown — set TARGET to your launch date ── */
+  const TARGET = new Date('2025-09-01T00:00:00');
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const diff = TARGET - Date.now();
+    if (diff <= 0) {
+      ['cd-d','cd-h','cd-m','cd-s'].forEach(id => {
+        document.getElementById(id).textContent = '00';
+      });
+      return;
+    }
+    const s = Math.floor(diff / 1000);
+    const m = Math.floor(s / 60);
+    const h = Math.floor(m / 60);
+    const d = Math.floor(h / 24);
+    document.getElementById('cd-d').textContent = pad(d);
+    document.getElementById('cd-h').textContent = pad(h % 24);
+    document.getElementById('cd-m').textContent = pad(m % 60);
+    document.getElementById('cd-s').textContent = pad(s % 60);
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+</script>
+</body>
+</html>
