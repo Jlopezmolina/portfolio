@@ -14,10 +14,10 @@
     :root {
       --bg:   #080808;
       --ink:  #EEECEA;
-      --i80:  rgba(238,236,234,0.80);
-      --i60:  rgba(238,236,234,0.60);
-      --i40:  rgba(238,236,234,0.40);
-      --i20:  rgba(238,236,234,0.20);
+      --i80:  rgba(238,236,234,0.85);
+      --i60:  rgba(238,236,234,0.72);
+      --i40:  rgba(238,236,234,0.55);
+      --i20:  rgba(238,236,234,0.38);
       --i10:  rgba(238,236,234,0.10);
       --i06:  rgba(238,236,234,0.06);
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -33,8 +33,8 @@
       font-family: var(--font);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      overflow: hidden;
-      height: 100dvh;
+      overflow-x: hidden;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -79,13 +79,14 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin-bottom: 2rem;
     }
     .wordmark {
-      font-size: .72rem; font-weight: 400; letter-spacing: .04em; color: var(--i40);
+      font-size: .82rem; font-weight: 400; letter-spacing: .04em; color: var(--i40);
     }
     .avail {
       display: flex; align-items: center; gap: 7px;
-      font-size: .7rem; color: var(--i40); letter-spacing: .07em;
+      font-size: .78rem; color: var(--i40); letter-spacing: .07em;
     }
     .avail-dot {
       width: 5px; height: 5px; background: #4ade80; border-radius: 50%;
@@ -99,10 +100,11 @@
       display: flex;
       flex-direction: column;
       justify-content: center;
+      padding: 3rem 0;
     }
 
     .label {
-      font-size: .6rem; font-weight: 500; letter-spacing: .18em;
+      font-size: .7rem; font-weight: 500; letter-spacing: .18em;
       text-transform: uppercase; color: var(--i20);
       margin-bottom: 1.4rem;
     }
@@ -113,30 +115,25 @@
       margin-bottom: 2rem;
     }
 
-    hr.rule { border: none; border-top: 1px solid var(--i10); margin-bottom: 1.6rem; }
+    hr.rule { border: none; border-top: 1px solid var(--i10); margin-bottom: 1.8rem; }
 
-    .body {
-      font-size: .85rem; font-weight: 300; color: var(--i60);
+    .body-text {
+      font-size: 1rem; font-weight: 300; color: var(--i60);
       line-height: 1.8; letter-spacing: .01em;
-      max-width: 480px;
+      max-width: 520px;
+      margin-bottom: 2.5rem;
     }
 
-    /* ─── Countdown ─── */
-    .countdown {
-      display: flex; gap: 2.5rem; margin-top: 2.8rem;
+    .back-link {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .84rem; font-weight: 300; color: var(--i40);
+      letter-spacing: .04em;
+      border: 1px solid var(--i10);
+      border-radius: 100px;
+      padding: .55rem 1.2rem;
+      transition: color .3s var(--ease), border-color .3s var(--ease);
     }
-    .cd-unit {
-      display: flex; flex-direction: column; gap: .35rem;
-    }
-    .cd-value {
-      font-size: clamp(1.8rem, 4vw, 2.8rem);
-      font-weight: 200; letter-spacing: -.03em; line-height: 1;
-      font-variant-numeric: tabular-nums;
-    }
-    .cd-label {
-      font-size: .58rem; letter-spacing: .14em; text-transform: uppercase;
-      color: var(--i20);
-    }
+    .back-link:hover { color: var(--ink); border-color: var(--i40); }
 
     /* ─── Bottom ─── */
     .bottom {
@@ -145,9 +142,10 @@
       align-items: flex-end;
       flex-wrap: wrap;
       gap: 1rem;
+      margin-top: 2rem;
     }
     .contact-line {
-      font-size: .68rem; color: var(--i20); letter-spacing: .04em;
+      font-size: .78rem; color: var(--i20); letter-spacing: .04em;
     }
     .contact-line a {
       color: var(--i40);
@@ -161,11 +159,11 @@
     }
     .contact-line a:hover { color: var(--i60); }
     .contact-line a:hover::after { right: 0; }
-    .copy { font-size: .65rem; color: var(--i20); letter-spacing: .04em; }
+    .copy { font-size: .76rem; color: var(--i20); letter-spacing: .04em; }
 
     @media (max-width: 540px) {
       body { padding: 2rem 1.5rem; }
-      .countdown { gap: 1.5rem; }
+      .top { flex-direction: column; align-items: flex-start; gap: .75rem; }
     }
   </style>
 </head>
@@ -183,26 +181,11 @@
   <p class="label rv" style="transition-delay:.1s">Under construction</p>
   <h1 class="heading rv" style="transition-delay:.17s">Something<br>is coming.</h1>
   <hr class="rule lr" style="transition-delay:.22s" />
-  <p class="body rv" style="transition-delay:.26s">
-    Working on something new. In the meantime, feel free to reach out or explore my existing work below.
+  <p class="body-text rv" style="transition-delay:.26s">
+    Working on a detailed write-up for this project. In the meantime, feel free to reach out or go back to explore my existing work.
   </p>
-  <div class="countdown rv" style="transition-delay:.32s" aria-live="polite">
-    <div class="cd-unit">
-      <span class="cd-value" id="cd-d">--</span>
-      <span class="cd-label">Days</span>
-    </div>
-    <div class="cd-unit">
-      <span class="cd-value" id="cd-h">--</span>
-      <span class="cd-label">Hours</span>
-    </div>
-    <div class="cd-unit">
-      <span class="cd-value" id="cd-m">--</span>
-      <span class="cd-label">Minutes</span>
-    </div>
-    <div class="cd-unit">
-      <span class="cd-value" id="cd-s">--</span>
-      <span class="cd-label">Seconds</span>
-    </div>
+  <div class="rv" style="transition-delay:.32s">
+    <a class="back-link" href="index.html">← Back to work</a>
   </div>
 </div>
 
@@ -210,14 +193,13 @@
   <p class="contact-line">
     Get in touch — <a href="mailto:jlopezmolina2004@gmail.com">jlopezmolina2004@gmail.com</a>
     &nbsp;·&nbsp;
-    <a href="index.html">Work →</a>
+    <a href="https://linkedin.com/in/jorge-lópez-molina-87590332b/" target="_blank" rel="noopener">LinkedIn</a>
   </p>
-  <span class="copy">© 2025</span>
+  <span class="copy">© 2026 Jorge López Molina</span>
 </div>
 
 <script>
 (function () {
-  /* ── Cursor ── */
   const cur = document.getElementById('cur');
   const ring = document.getElementById('cur-ring');
   let mx = -300, my = -300, rx = -300, ry = -300;
@@ -235,36 +217,9 @@
     el.addEventListener('mouseleave', () => document.body.classList.remove('hov'));
   });
 
-  /* ── Reveal ── */
   requestAnimationFrame(() => {
     document.querySelectorAll('.rv, .lr').forEach(el => el.classList.add('in'));
   });
-
-  /* ── Countdown — set TARGET to your launch date ── */
-  const TARGET = new Date('2025-09-01T00:00:00');
-
-  function pad(n) { return String(n).padStart(2, '0'); }
-
-  function tick() {
-    const diff = TARGET - Date.now();
-    if (diff <= 0) {
-      ['cd-d','cd-h','cd-m','cd-s'].forEach(id => {
-        document.getElementById(id).textContent = '00';
-      });
-      return;
-    }
-    const s = Math.floor(diff / 1000);
-    const m = Math.floor(s / 60);
-    const h = Math.floor(m / 60);
-    const d = Math.floor(h / 24);
-    document.getElementById('cd-d').textContent = pad(d);
-    document.getElementById('cd-h').textContent = pad(h % 24);
-    document.getElementById('cd-m').textContent = pad(m % 60);
-    document.getElementById('cd-s').textContent = pad(s % 60);
-  }
-
-  tick();
-  setInterval(tick, 1000);
 })();
 </script>
 </body>
