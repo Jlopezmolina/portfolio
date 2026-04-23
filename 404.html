@@ -14,11 +14,12 @@
     :root {
       --bg:   #080808;
       --ink:  #EEECEA;
-      --i80:  rgba(238,236,234,0.80);
-      --i60:  rgba(238,236,234,0.60);
-      --i40:  rgba(238,236,234,0.40);
-      --i20:  rgba(238,236,234,0.20);
+      --i80:  rgba(238,236,234,0.85);
+      --i60:  rgba(238,236,234,0.72);
+      --i40:  rgba(238,236,234,0.55);
+      --i20:  rgba(238,236,234,0.38);
       --i10:  rgba(238,236,234,0.10);
+      --i06:  rgba(238,236,234,0.06);
       --ease: cubic-bezier(0.22, 1, 0.36, 1);
       --eout: cubic-bezier(0.16, 1, 0.30, 1);
       --font: -apple-system, BlinkMacSystemFont, 'Manrope', system-ui, sans-serif;
@@ -32,8 +33,8 @@
       font-family: var(--font);
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
-      overflow: hidden;
-      height: 100dvh;
+      overflow-x: hidden;
+      min-height: 100dvh;
       display: flex;
       align-items: center;
       justify-content: center;
@@ -78,7 +79,6 @@
       width: 100%;
     }
 
-    /* Ghost number */
     .ghost {
       position: absolute;
       right: -1.5rem; top: 50%;
@@ -91,7 +91,7 @@
     }
 
     .label {
-      font-size: .6rem; font-weight: 500; letter-spacing: .18em;
+      font-size: .7rem; font-weight: 500; letter-spacing: .18em;
       text-transform: uppercase; color: var(--i20);
       margin-bottom: 1.4rem;
     }
@@ -102,25 +102,23 @@
       margin-bottom: 1.5rem;
     }
 
-    .body {
-      font-size: .85rem; font-weight: 300; color: var(--i60);
+    .desc {
+      font-size: 1rem; font-weight: 300; color: var(--i60);
       line-height: 1.8; letter-spacing: .01em;
       max-width: 340px;
       margin-bottom: 2.4rem;
     }
 
     .back {
-      font-size: .7rem; color: var(--i40); letter-spacing: .06em;
-      position: relative; white-space: nowrap;
-      transition: color .3s var(--ease);
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .84rem; font-weight: 300; color: var(--i40);
+      letter-spacing: .04em;
+      border: 1px solid var(--i10);
+      border-radius: 100px;
+      padding: .55rem 1.2rem;
+      transition: color .3s var(--ease), border-color .3s var(--ease);
     }
-    .back::after {
-      content: ''; position: absolute; bottom: -2px; left: 0; right: 100%;
-      height: 1px; background: var(--i60);
-      transition: right .4s var(--ease);
-    }
-    .back:hover { color: var(--i60); }
-    .back:hover::after { right: 0; }
+    .back:hover { color: var(--ink); border-color: var(--i40); }
 
     @media (max-width: 480px) {
       .ghost { display: none; }
@@ -138,7 +136,7 @@
 
   <p class="label rv" style="transition-delay:.05s">Error</p>
   <h1 class="heading rv" style="transition-delay:.12s">Page not<br>found.</h1>
-  <p class="body rv" style="transition-delay:.2s">
+  <p class="desc rv" style="transition-delay:.2s">
     The page you are looking for does not exist or has been moved.
   </p>
   <a class="back rv" href="index.html" style="transition-delay:.28s">← Back to work</a>
